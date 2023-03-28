@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Create Product Code</title>
+</head>
+<body>
+  <h1>Create Product Code</h1>
+  <form id="product-form">
+    <label for="brand">Brand:</label>
+    <input type="text" name="brand" id="brand" required><br>
+
+    <label for="model">Model:</label>
+    <input type="text" name="model" id="model" required><br>
+
+    <label for="screen_size">Screen Size:</label>
+    <input type="text" name="screen_size" id="screen_size" required><br>
+
+    <label for="resolution">Resolution:</label>
+    <input type="text" name="resolution" id="resolution" required><br>
+
+    <label for="storage">Storage:</label>
+    <input type="text" name="storage" id="storage" required><br>
+
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" required><br>
+
+    <button type="submit">Create Product Code</button>
+  </form>
+
+  <div id="product-details"></div>
+
+  <script>
+    const form = document.getElementById('product-form');
+    const productDetails = document.getElementById('product-details');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const brand = form.brand.value;
+      const model = form.model.value;
+      const screenSize = form.screen_size.value;
+      const resolution = form.resolution.value;
+      const storage = form.storage.value;
+      const price = form.price.value;
+
+      const now = new Date();
+      const date = now.getDate();
+      const month = now.getMonth() + 1; // add 1 because months are 0-indexed
+      const year = now.getFullYear();
+
+      const productCode = `${brand.substring(0, 3).toUpperCase()}-${model.substring(0, 3).toUpperCase()}-${screenSize}-${resolution}-${storage}GB-${date}${month}${year}`;
+
+      const name = `${brand} ${model}`;
+      const title = `${model} ${screenSize} ${resolution} ${storage}GB`;
+
+      const productDetailsHtml = `
+        <h2>Product Details:</h2>
+        <p>Name: ${name}</p>
+        <p>Title: ${title}</p>
+        <p>Date: ${date}</p>
+        <p>Month: ${month}</p>
+        <p>Year: ${year}</p>
+        <p>Product Code: ${productCode}</p>
+      `;
+
+      productDetails.innerHTML = productDetailsHtml;
+    });
+  </script>
+  <a href="p2.html">Show Product</a>
+</body>
+</html>
